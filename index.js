@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, 'index.html'))
 })
 
-app.post('/api/post', rateLimiter({ secondsWindow: 2, allowedHits: 4 }), async (req, res) => {
+app.post('/api/post', async (req, res) => {
 	// implement rate limiting
 	return res.json({
 		status: 'ok'
