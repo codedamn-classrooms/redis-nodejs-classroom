@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>GitHub URL project with Node.js and Redis</title>
+	</head>
+	<body>
+		<h1>Enter the repo in the format: facebook/react</h1>
+		<form id="form">
+			<input type="text" id="repo-name" placeholder="Enter repository" />
+			<input type="submit" value="Go" />
+			<pre id="output"></pre>
+		</form>
+
+		<script>
+			const form = document.getElementById('form')
+			const input = document.getElementById('repo-name')
+			form.addEventListener('submit', handleSubmit)
+			async function handleSubmit(e) {
+				e.preventDefault()
+				const timeStart = Date.now()
+
+				const data = await fetch('/data', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						repo: input.value
+					})
+				}).then((t) => t.json())
+
+				const timeEnd = Date.now()
+
+				if (data.stars != undefined) {
+					document.getElementById('output').innerText = `
+                
+Stars for ${input.value} = ${data.stars}. 
+
+`
+				} else {
+					alert('Wrong repo URL')
+				}
+			}
+		</script>
+	</body>
+</html>

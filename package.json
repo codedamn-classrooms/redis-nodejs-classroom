@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "ioredis": "^4.25.0",
+    "node-fetch": "^2.6.1"
+  }
+}
