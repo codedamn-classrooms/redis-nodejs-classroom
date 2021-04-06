@@ -7,15 +7,32 @@ const app = express()
 
 app.use(express.json())
 
+app.post('/api/route', async (req, res) => {
+	// add data here
+	const ip = req.headers['x-forwarded-for'] || req.ip
+
+	const reqs = await redis.incr(ip)
+	await redis.expire(ip, 2)
+
+	if (reqs > 15) {
+		return res.json({
+			status: 'rate-limited'
+		})
+	} else if (reqs > 10) {
+		return res.json({
+			status: 'about-to-rate-limit'
+		})
+	} else {
+		res.json({
+			status: 'ok'
+		})
+	}
+})
+
 app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, 'index.html'))
 })
 
-app.post('/api/post', async (req, res) => {
-	// implement rate limiting
-	return res.json({
-		status: 'ok'
-	})
+app.listen(process.env.PUBLIC_PORT, () => {
+	console.log('Server ready')
 })
-
-app.listen(process.env.PUBLIC_PORT)
