@@ -1,0 +1,2 @@
+terminals: ['sleep 2 && redis-cli', 'sleep 2 && bash setup.sh', 'redis-server']
+playground-view: terminal-editor
