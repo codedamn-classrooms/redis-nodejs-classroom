@@ -1,2 +1,2 @@
 tabs: ["index.js", "redis-client.js"]
-terminals: ['yarn install && node index.js', 'redis-server']
+terminals: ["yarn install && yarn run nodemon index.js", "redis-server"]
