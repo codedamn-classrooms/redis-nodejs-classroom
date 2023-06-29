@@ -10,15 +10,17 @@
 		<pre id="output"></pre>
 
 		<script>
-			const api1 = document.getElementById('api1')
-			const output = document.getElementById('output')
+			const api1 = document.getElementById("api1");
+			const output = document.getElementById("output");
 
-			api1.addEventListener('click', hitApi)
+			api1.addEventListener("click", hitApi);
 
 			async function hitApi(id) {
-				const res = await fetch(`/api/post`, { method: 'POST' }).then((t) => t.json())
+				const res = await fetch(`/api/route`, { method: "POST" }).then(
+					(t) => t.json()
+				);
 
-				output.innerText += `\nResponse: ${res.status}`
+				output.innerText += `\nResponse: ${res.status}`;
 			}
 		</script>
 	</body>
